@@ -1,8 +1,0 @@
-{
-    "name": "Flowise Development Container",
-    "image": "mcr.microsoft.com/vscode/devcontainers/typescript-node:0-18",
-    "extensions": [
-        "GitHub.copilot",
-        "GitHub.copilot-chat"
-    ]
-}
