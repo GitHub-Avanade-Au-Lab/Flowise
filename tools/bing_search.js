@@ -1,6 +1,6 @@
 const fetch = require('node-fetch')
 const apiKey = process.env.BING_API_KEY
-const query = 'Azure DevOps vs GitHub Enterprise comparison for migration benefits' // replace with your actual query
+const query = $optimized_query //'Azure DevOps vs GitHub Enterprise comparison for migration benefits' // replace with your actual query
 const encodedQuery = encodeURIComponent(query)
 const url = `https://api.bing.microsoft.com/v7.0/search?q=${encodedQuery}`
 const options = {
