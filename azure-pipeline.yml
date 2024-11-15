@@ -1,0 +1,36 @@
+trigger:
+    branches:
+        include:
+            - main
+
+name: $(date:yyyyMMdd)$(rev:.r)
+
+variables:
+    - group: 'Reactjs-OpenAI-Var-Group'
+    - name: azureSubscription
+      value: 'SPN_AI_Enterprise'
+
+    - stage: Build
+      displayName: 'Build Docker Image'
+      jobs:
+          - job: Build
+            displayName: 'Build'
+            pool:
+                vmImage: 'ubuntu-latest'
+            steps:
+                - task: Docker@2
+                  inputs:
+                      containerRegistry: 'ACR_Service_Connection'
+                      repository: 'flowise'
+                      command: 'buildAndPush'
+                      Dockerfile: '**/Dockerfile'
+                      buildContext: '.'
+                      tags: '$(Build.BuildNumber)'
+                  displayName: 'Build Docker'
+
+                - task: Bash@3
+                  inputs:
+                      targetType: 'inline'
+                      script: |
+                          echo "Container Image is ready for deployment."
+                  displayName: 'Ready for App Service Update'
